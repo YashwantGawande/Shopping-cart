@@ -1,18 +1,16 @@
-import CartItem from "./components/CartItem"
 
 const reducer = (state, action) => {
-    if (action, type === 'CLEAR_CART') {
+    if (action.type === 'CLEAR_CART') {
         return { ...state, cart: [] }
     }
-    if (action, type === 'REMOVE') {
+    if (action.type === 'REMOVE') {
         return {
             ...state,
-            cart: state.cart.filter((cartItem) => cartItem.id !==
-                action.payload),
+            cart: state.cart.filter((cartItem) => cartItem.id !== action.payload),
         }
     }
-    /*
-    if (action, type === 'INCREASE') {
+
+    if (action.type === 'INCREASE') {
         let tempCart = state.cart.map((cartItem) => {
             if (cartItem.id === action.payload) {
                 return {
@@ -22,7 +20,7 @@ const reducer = (state, action) => {
         })
         return { ...state, cart: tempCart }
     }
-    if (action, type === 'DECREASE') {
+    if (action.type === 'DECREASE') {
         let tempCart = state.cart.map((cartItem) => {
             if (cartItem.id === action.payload) {
                 return {
@@ -31,7 +29,7 @@ const reducer = (state, action) => {
             } return cartItem
         }).filter((cartItem) => cartItem.amount !== 0)
         return { ...state, cart: tempCart }
-    }*/
+    }
     if (action.type === 'GET_TOTALS') {
         let { total, amount } = state.cart.reduce((cartTotal, cartItem) => {
             const { price, amount } = cartItem
@@ -45,7 +43,7 @@ const reducer = (state, action) => {
                 total: 0,
                 amount: 0,
             })
-        total = parseFloat(total.tofixed(2))
+        total = parseFloat(total.toFixed(2))
 
         return { ...state, total, amount }
     }
@@ -70,6 +68,6 @@ const reducer = (state, action) => {
         }).filter((cartItem) => cartItem.amount !== 0)
         return { ...state, cart: tempCart }
     }
-    throw new Error ('non matching action type')
+    throw new Error('non matching action type')
 }
 export default reducer
